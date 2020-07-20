@@ -12,7 +12,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 let global_width = 400;
 
-export const API_URL = "http://192.168.2.12:8000/api/encounters";
+export const API_URL = "http://0.0.0.0:8000/api/encounters/";
 
 function DaysFrostRenderer() {
   this.eGui = document.createElement("div");

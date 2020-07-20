@@ -8,7 +8,4 @@ COPY . /code/
 EXPOSE 8000
 
 # start app
-CMD ["python" ,"manage.py", "makemigrations"]
-CMD ["python" ,"manage.py", "migrate"]
-CMD ["python" ,"manage.py", "initadmin"]
 CMD ["python" ,"manage.py", "runserver", "0.0.0.0:8000"]
