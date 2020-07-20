@@ -1,0 +1,83 @@
+html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    background-color: #F5F5F5;
+    box-sizing: border-box;
+    -webkit-overflow-scrolling: touch;
+}
+
+html {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 0;
+    overflow: auto;
+}
+
+body {
+    padding: 1rem;
+    overflow: auto;
+}
+
+.example-wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.ag-header-cell-filtered {
+    background-color: #1b6d85 !important;
+    color: #fff !important;
+  }
+  
+  .ag-header-cell-filtered span {
+    color: #fff !important;
+  }
+
+  .ag-header-cell{
+    /* Force the width corresponding at how much width
+    we need once the text is laid out vertically */
+    color: black;
+  }
+
+  .ag-icon ag-icon-menu{
+      visibility: visible;
+  }
+
+  .ag-popup-child {
+    width: 15rem !important;
+    font-size:1rem !important;
+}
+
+.ag-theme-alpine input{
+    font-size:1rem !important;
+}
+
+.ag-font-style {
+    user-select: initial;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    -webkit-user-select: text;
+  }
+
+  img {
+    margin: 1em;
+  }
+
+.ag-header-group-text{
+    font-size: 15px !important;
+    font-weight: 600 !important;
+}
+.ag-header-cell-text{
+    font-size: 13px !important;
+    font-weight: 600 !important;
+}
+
+  .ag-cell{
+      font-size: 18px !important;
+  }
+
+  .cell-wrap {
+    white-space: normal !important;
+  }
