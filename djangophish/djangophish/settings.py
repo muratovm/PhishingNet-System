@@ -26,13 +26,14 @@ SECRET_KEY = 'sszy8x16ii(q82=7=$1hu_pg*+m(0q06@bs(z(a0*k-q5()%+c'
 DEBUG = True
 
 
-ALLOWED_HOSTS=['192.168.2.12',"localhost","0.0.0.0"]
+ALLOWED_HOSTS=['192.168.2.12',"localhost","0.0.0.0","*"]
 
 
 # Application definition
 
 INSTALLED_APPS = [
     'rest_framework',
+    'rest_framework.authtoken',
     'corsheaders',
     'table.apps.TableConfig',
     'django.contrib.admin',
@@ -43,6 +44,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_cleanup',
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ]
+}
 
 CORS_ORIGIN_ALLOW_ALL = True
 
@@ -62,7 +70,7 @@ ROOT_URLCONF = 'djangophish.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -94,7 +102,7 @@ DATABASES = {
         'NAME': 'mydb',
         'USER': 'postgres',
         'PASSWORD': 'lorencia',
-        'HOST': 'db',
+        'HOST': 'localhost',
         'PORT': '5432',
     }
 }
@@ -143,3 +151,5 @@ MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'djangophish/media')
 DATE_INPUT_FORMATS = ['%d/%m/%Y']
 
 APPEND_SLASH=False
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
