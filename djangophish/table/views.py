@@ -3,6 +3,7 @@ from django.views import generic
 
 from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.response import Response
+from django.contrib.auth.models import User
 from rest_framework import status
 
 
@@ -59,7 +60,29 @@ class EncounterUpload(APIView):
         else:
             print(serializer.errors)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-        
+
+class CreateUser(APIView):
+    parser_classes = (MultiPartParser, FormParser)
+    def post(self, request, format=None):
+        required = ["username","email","password"]
+        for req in required:
+            if req not in request.data:
+                return Response(status=status.HTTP_400_BAD_REQUEST)
+        username = request.data["username"]
+        email = request.data["email"]
+        password = request.data["password"]
+        print(username)
+        user,created = User.objects.get_or_create(username=username)
+        if created:
+            user.email = email
+            user.set_password(password)
+            user.save()
+            return Response(status=status.HTTP_201_CREATED)
+        else:
+            return Response(status=status.HTTP_400_BAD_REQUEST) 
+    def get(self, request, format=None):
+        return Response(status=status.HTTP_400_BAD_REQUEST)
+
 # Create your views here.
 @api_view(['GET', 'POST'])
 @authentication_classes([SessionAuthentication, BasicAuthentication, TokenAuthentication])
@@ -75,13 +98,3 @@ def encounters(request):
         serializer = EncounterSerializer(data, context={'request': request}, many=True)
         print(serializer.data)
         return Response(serializer.data)
-    
-    elif request.method == 'POST':
-        print(request.data)
-        serializer = EncounterSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(status=status.HTTP_201_CREATED)
-            
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-        

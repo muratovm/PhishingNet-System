@@ -9,8 +9,6 @@ class Encounter(models.Model):
     def __str__(self):
         return str(self.url) +"   "+ str(self.date) +"   "+ str(self.time)
     
-    
-
     url = models.URLField(max_length=200, blank=True, default="")
     sha256 = models.CharField(max_length=64, blank=True, default="")
     date = models.DateField(default=datetime.date.today)
