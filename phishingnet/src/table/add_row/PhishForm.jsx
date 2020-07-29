@@ -6,7 +6,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
 import axios from "axios";
-export const API_URL = "http://192.168.2.12:8000/api/encounters/";
+export const API_URL = "http://192.168.2.12:8000/api/encounters/upload";
 
 class PhishForm extends React.Component{
   
@@ -35,25 +35,32 @@ class PhishForm extends React.Component{
       };
       
     handleImageChange = (e) => {
-    this.setState({
-        form_image: e.target.files[0]
-    })
+      this.setState({
+          form_image: e.target.files[0]
+      })
     };
 
     handleSubmit = (e) => {
       e.preventDefault();
-      console.log(this.state);
       let form_data = new FormData();
+      form_data.append('url', this.state.form_url);
+      form_data.append('sha256', this.state.form_hash);
+
+      let strings = this.state.form_date.split("/");
+      let date = strings.join("-")
+      form_data.append('dated', date);
+      form_data.append('time', this.state.form_time+":00");
       
-      //let date = new Date(this.state.datetime);
-      //let utc = date.toISOString();
-      //alert(utc)
-      
-      form_data.append('url', "http://www.ara.com");
-      form_data.append('sha256', "bbbbbbbbbbbbbbbbbbbbbbbbbbwhda");
-      form_data.append('dated', "2020-07-05");
-      form_data.append('time', "15:38:09");
-      form_data.append('scores', '[{"type": "Image Score","score": 10}]');
+      let scores = []
+      if(this.state.form_image_score != ''){
+        let image_score = {"type":"Image Score", "score":this.state.form_image_score}
+        scores.push(JSON.stringify(image_score))
+      }
+      if(this.state.form_hash_score != ''){
+        let hash_score = {"type":"Hash Score", "score":this.state.form_hash_score}
+        scores.push(JSON.stringify(hash_score))
+      }
+      form_data.append('scores', "["+scores+"]");
       form_data.append('image', this.state.form_image, this.state.form_image.name);
       
       axios.post(this.state.url, form_data, {
@@ -62,45 +69,25 @@ class PhishForm extends React.Component{
           'Accept':'*/*',
           'Authorization': 'Token ' + this.state.token
         }
-      }).then(res => {
-            console.log(res.data);
-            let headers = {
-              'Authorization': 'Token '+this.state.token
-            }
-            
-            axios.get(API_URL,{
-              headers: headers
-            }).then(res =>{
-              for(var i=0; i<res.data.length; i++){
-                for(var j=0; j<res.data[i].scores.length; j++){
-                  let type = res.data[i].scores[j].type
-                  let score = res.data[i].scores[j].score
-                  res.data[i][type] = score
-                }
-                delete res.data[i].scores
-              }
-              this.props.onTableChange(res.data)
-            });
-            
-          })
-          .catch(err => console.log(err))
+      }).then(res => {this.props.onTableChange()})
+        .catch(err => console.log(err))
     };
       
     render(){
         return(
-            <form style={{width:"80%", margin:"auto", marginTop:"60px"}} onSubmit={this.handleSubmit} noValidate autoComplete="off">
+            <form style={{width:"80%", marginRight:"auto", marginTop:"80px"}} onSubmit={this.handleSubmit} noValidate autoComplete="off">
               <Typography style={{width:"50%"}}>Details</Typography>
-              <TextField style={{width:"50%"}} id="form_url" label="URL" variant="outlined" onChange={this.handleChange}/>
-              <TextField style={{width:"50%"}} id="form_hash" label="Hash" variant="outlined"/>
+              <TextField style={{backgroundColor: '#ffffff', width:"100%"}} id="form_url" label="URL" variant="outlined" onChange={this.handleChange}/>
+              <TextField style={{backgroundColor: '#ffffff', width:"100%"}} id="form_hash" label="Hash" variant="outlined" onChange={this.handleChange}/>
               <Typography>Occurance</Typography>
-              <TextField style={{width:"50%"}} id="form_data"  type="date" variant="outlined"/>
-              <TextField style={{width:"50%"}} id="form_time"  type="time" variant="outlined"/>
+              <TextField style={{backgroundColor: '#ffffff',width:"100%"}} id="form_date"  type="date" variant="outlined" onChange={this.handleChange}/>
+              <TextField style={{backgroundColor: '#ffffff',width:"100%"}} id="form_time"  type="time" variant="outlined" onChange={this.handleChange}/>
               <Typography>Scores</Typography>
-              <TextField style={{width:"50%"}} id="form_image_score" label="Image Score" type="number" variant="outlined"/>
-              <TextField style={{width:"50%"}} id="form_hash_score" label="Hash Score" type="number" variant="outlined"/>
+              <TextField style={{backgroundColor: '#ffffff',width:"100%"}} id="form_image_score" label="Image Score" type="number" variant="outlined" onChange={this.handleChange}/>
+              <TextField style={{backgroundColor: '#ffffff',width:"100%"}} id="form_hash_score" label="Hash Score" type="number" variant="outlined" onChange={this.handleChange}/>
               <Typography>Image</Typography>
-              <TextField style={{width:"100%"}} id="form_image" type="file" variant="outlined" accept="image/png, image/jpeg" onChange={this.handleImageChange} required/>
-              <Button style={{width:"100%", padding:10, marginTop:"25px"}}type="submit" color="primary" variant="contained">Submit</Button>
+              <TextField style={{backgroundColor: '#ffffff',width:"100%"}} id="form_image" type="file" variant="outlined" accept="image/png, image/jpeg" onChange={this.handleImageChange} required/>
+              <Button style={{backgroundColor: '#D4D4D4',width:"100%", padding:10, marginTop:"25px"}} type="submit" color="black" variant="contained">Submit</Button>
             </form>
         )
     };

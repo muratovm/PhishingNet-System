@@ -9,8 +9,6 @@ import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
 import 'ag-grid-enterprise';
-
-import axios from "axios";
 export const API_URL = "http://192.168.2.12:8000/api/encounters/";
 
 let global_width = 400;
@@ -191,18 +189,18 @@ class PhishGrid extends React.Component{
     );
   } 
 
-    onGridReady(params){
-        this.state.gridApi = params.api;
-        //global_width = window.innerWidth
-        this.state.gridApi.refreshCells()
-        this.state.gridColumnApi = params.columnApi;
-      }
+  onGridReady(params){
+      this.state.gridApi = params.api;
+      //global_width = window.innerWidth
+      this.state.gridApi.refreshCells()
+      this.state.gridColumnApi = params.columnApi;
+    }
 
-      componentWillReceiveProps(nextProps) {
-        this.setState({ rowData: nextProps.rowData });  
-      }
+  componentWillReceiveProps(nextProps) {
+    this.setState({ rowData: nextProps.rowData });  
+  }
     
-updateWindowDimensions() {
+  updateWindowDimensions() {
     this.setState({ width: window.innerWidth, height: window.innerHeight });
     if(this.state.gridApi != null){
       global_width = window.innerWidth
