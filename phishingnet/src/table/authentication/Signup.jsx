@@ -74,6 +74,9 @@ class Signup extends React.Component{
               <TextField style={{width:"100%", margin:"auto", marginBottom:"10px"}} id="email" label="email" variant="outlined" onChange={this.handleChange}/>
               <TextField ref={el => this.password = el} style={{width:"100%", margin:"auto", marginBottom:"10px"}} id="password" label="password" type="password" variant="outlined" onChange={this.handleChange}/>
               <TextField ref={el => this.repeat_password = el} style={{width:"100%", margin:"auto", marginBottom:"10px"}} id="repeat_password" label="repeat password" type="password" variant="outlined" onChange={this.handleChange}/>
+              <Box ref="alert" style={{width:"100%", margin:"0px"}} visibility={this.state.alert}>
+                    <Typography color='secondary'>An Error Occured</Typography>
+              </Box>
               <Button style={{backgroundColor: '#D4D4D4',width:"100%",  marginBottom:"10px", display:"flex"}}type="submit"  variant="contained">Create User</Button>
               <Link href="/" variant="body2">Login</Link>
             </form>

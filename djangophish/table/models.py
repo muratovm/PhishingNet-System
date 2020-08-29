@@ -1,9 +1,16 @@
 from django.db import models
 from django.contrib.auth.models import User
 import datetime
+import os
 
 from django.conf import settings
 # Create your models here.
+
+def directory_path(instance, filename):
+    fullname = os.path.join(settings.MEDIA_ROOT, filename)
+    if os.path.exists(fullname):
+        os.remove(fullname)
+    return filename
 
 class Encounter(models.Model):
     def __str__(self):
@@ -13,7 +20,7 @@ class Encounter(models.Model):
     sha256 = models.CharField(max_length=64, blank=True, default="")
     date = models.DateField(default=datetime.date.today)
     time = models.TimeField(default="00:00")
-    image = models.ImageField(default = None, blank=True, upload_to="images/encounters/", height_field=None, width_field=None)
+    image = models.ImageField(default = None, blank=True, upload_to=directory_path, height_field=None, width_field=None)
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
 
 class ScoreCategory(models.Model):
