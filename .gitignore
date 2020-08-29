@@ -1,1 +1,4 @@
 djangophish/media/
+djangophish/.venv
+djangophish/.vs
+phishingnet/node_modules
