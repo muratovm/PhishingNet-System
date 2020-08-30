@@ -1,16 +1,8 @@
 
 ## Create and activate Python Virtual Enviroment
-
-**On Windows:**
 ```
-py -m venv .venv
-.\.venv\Scripts\activate
-```
-
-**On Linux:**
-```
-python -m venv .venv
-source .venv/bin/activate
+python -m venv venv
+source venv/bin/activate
 ```
 
 ---
