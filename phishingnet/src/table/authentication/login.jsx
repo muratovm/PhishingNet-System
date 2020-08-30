@@ -8,7 +8,7 @@ import Box from '@material-ui/core/Box';
 import Link from '@material-ui/core/Link';
 import axios from "axios";
 
-const URL = "http://192.168.2.12:8000/api-token-auth/";
+const URL = "http://127.0.0.1:8000/api-token-auth/";
 
 class Login extends React.Component{
 

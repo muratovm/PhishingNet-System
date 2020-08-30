@@ -6,14 +6,11 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
 import axios from "axios";
-export const API_URL = "http://192.168.2.12:8000/api/encounters/upload";
-
 class PhishForm extends React.Component{
   
     constructor(props) {  
       super(props);
       this.state = {
-          url: props.url,
           token: props.token,
           form_url:'',
           form_hash:'',

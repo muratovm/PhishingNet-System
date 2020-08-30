@@ -14,7 +14,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 
 let global_width = 400;
 
-export const API_URL = "http://192.168.2.12:8000/api/encounters/";
+export const API_URL = "http://127.0.0.1:8000/api/encounters/";
 
 class Dashboard extends Component {
 
@@ -129,8 +129,7 @@ handleTableChange(){
         <Grid item xs={12} md={12} lg={12} xl={3}> 
 
             
-            <PhishForm 
-              url="http://192.168.2.12:8000/api/encounters/upload"
+            <PhishForm
               token={this.state.token}
               onTableChange={this.handleTableChange}
             />
