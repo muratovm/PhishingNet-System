@@ -19,6 +19,7 @@ source .venv/bin/activate
 ```
 cd djangophish
 pip install -r requirements.txt
+cd ..
 ```
 
 **Install the npm dependencies**
