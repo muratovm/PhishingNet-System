@@ -23,10 +23,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'sszy8x16ii(q82=7=$1hu_pg*+m(0q06@bs(z(a0*k-q5()%+c'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 
-ALLOWED_HOSTS=['192.168.2.12',"localhost","0.0.0.0","*"]
+ALLOWED_HOSTS=['192.168.2.12',"localhost","0.0.0.0","*","54.39.96.50"]
 
 
 # Application definition
@@ -53,6 +53,7 @@ REST_FRAMEWORK = {
 }
 
 CORS_ORIGIN_ALLOW_ALL = True
+
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
@@ -145,8 +146,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'djangophish/media')
+MEDIA_URL = '/media/images/encounters/'
+MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'djangophish/media/images/encounters/')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 DATE_INPUT_FORMATS = ['%d/%m/%Y']
 
 APPEND_SLASH=False

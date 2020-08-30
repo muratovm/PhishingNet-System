@@ -9,7 +9,7 @@ import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
 import 'ag-grid-enterprise';
-export const API_URL = "http://127.0.0.1:8000/api/encounters/";
+export const API_URL = "https://www.guitest.xyz:8000/api/encounters/";
 
 let global_width = 400;
 

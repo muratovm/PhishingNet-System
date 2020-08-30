@@ -14,7 +14,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 
 let global_width = 400;
 
-export const API_URL = "http://127.0.0.1:8000/api/encounters/";
+export const API_URL = "https://www.guitest.xyz:8000/api/encounters/";
 
 class Dashboard extends Component {
 

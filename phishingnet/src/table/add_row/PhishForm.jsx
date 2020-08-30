@@ -6,6 +6,10 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
 import axios from "axios";
+
+
+const URL = "https://www.guitest.xyz:8000/api/encounters/upload";
+
 class PhishForm extends React.Component{
   
     constructor(props) {  
@@ -60,7 +64,7 @@ class PhishForm extends React.Component{
       form_data.append('scores', "["+scores+"]");
       form_data.append('image', this.state.form_image, this.state.form_image.name);
       
-      axios.post(this.state.url, form_data, {
+      axios.post(URL, form_data, {
         headers: {
           'content-type': 'multipart/form-data',
           'Accept':'*/*',
