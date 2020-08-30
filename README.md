@@ -31,12 +31,12 @@ cd ..
 
 ---
 
-**Run the Django Server on exposed network**
+**Run the Django Server on exposed network (in Terminal 1)**
 ```
 python .\djangophish\manage.py runserver 0.0.0.0:8000
 ```
 
-**Run the React development version**
+**Run the React development version (in Terminal 2)**
 ```
 npm start --prefix ./phishingnet
 ```
