@@ -1,5 +1,5 @@
 
-## Create and activate Python Virtual Enviroment
+**Create and activate Python Virtual Enviroment**
 ```
 python -m venv venv
 source venv/bin/activate
