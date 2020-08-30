@@ -1,0 +1,16 @@
+[Unit]
+Description=gunicorn daemon
+Requires=gunicorn.socket
+After=network.target
+
+[Service]
+User=michael
+Group=www-data
+WorkingDirectory=/home/michael/Documents/PhishingNet-System/djangophish/
+ExecStart=/home/michael/Documents/PhishingNet-System/djangophish/venv/bin/gunicorn \
+           --access-logfile - \
+           --workers 3 \
+           --bind unix:/run/gunicorn.sock \
+           djangophish.wsgi:application
+[Install]
+WantedBy=multi-user.target

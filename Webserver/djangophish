@@ -1,0 +1,21 @@
+server {
+    listen 8000 ssl;
+    server_name www.guitest.xyz;
+    root /home/michael/Documents/PhishingNet-System/djangophish;
+    underscores_in_headers on;
+
+    ssl_certificate /etc/letsencrypt/live/www.guitest.xyz/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/www.guitest.xyz/privkey.pem; # managed by Certbot
+    include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
+
+    location /media/ {
+       access_log on;
+       root /home/michael/Documents/PhishingNet-System/djangophish;
+    }
+
+    location / {
+        include proxy_params;
+        proxy_pass http://unix:/run/gunicorn.sock;
+    }
+}
