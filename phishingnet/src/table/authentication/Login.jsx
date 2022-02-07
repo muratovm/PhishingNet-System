@@ -8,7 +8,7 @@ import Box from '@material-ui/core/Box';
 import Link from '@material-ui/core/Link';
 import axios from "axios";
 
-const URL = "https://www.guitest.xyz:8000/api-token-auth/";
+const URL = "http://0.0.0.0:9090/api-token-auth/";
 
 class Login extends React.Component{
 
@@ -36,13 +36,15 @@ class Login extends React.Component{
 
         form_data.append('username', this.state.username);
         form_data.append('password', this.state.password);
-
+        
+        //sent request to log in the user
         axios.post(URL, form_data, {
             headers: {
                 'Content-Type': 'multipart/form-data',
                 'Accept':'*/*'
             }
             }).then(res => {
+                //redirect to the dashboard and pass it the login credentials 
                 history.push({
                     pathname:"/dashboard", 
                     login_data:{
@@ -50,6 +52,7 @@ class Login extends React.Component{
                     }
                 })
             }).catch(err => {
+                //bring up the incorrect password prompt
                 this.setState(
                     {
                         alert:"visible",
@@ -57,7 +60,8 @@ class Login extends React.Component{
                         password:null
                     }
                 )
-                Array.from(document.querySelectorAll("input")).forEach(
+                //erase the text of the username and password
+                Array.from(document.querySelectorAll("password")).forEach(
                     input => (input.value = "")
                   );
                 }
@@ -76,7 +80,7 @@ class Login extends React.Component{
     render(){
         return(
             <form onSubmit={this.handleSubmit} style={{margin:"auto", paddingTop:"100px", width:"50%", maxWidth:"700px"}}>
-              <Typography variant="h2" style={{width:"100%", margin:"10px"}}>Login</Typography>
+              <Typography variant="h3" style={{width:"100%", margin:"10px"}}>Login</Typography>
               <TextField style={{width:"100%", margin:"auto", marginBottom:"10px"}} id="username" label="username" variant="outlined" onChange={this.handleChange}/>
               <TextField ref={el => this.password = el} style={{width:"100%", margin:"auto", marginBottom:"10px"}} id="password" label="password" type="password" variant="outlined" onChange={this.handleChange}/>
               

@@ -71,7 +71,7 @@ class CreateUser(APIView):
         username = request.data["username"]
         email = request.data["email"]
         password = request.data["password"]
-        print(username)
+        print(username,email,password)
         user,created = User.objects.get_or_create(username=username)
         if created:
             user.email = email

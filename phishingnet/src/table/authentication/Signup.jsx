@@ -8,7 +8,7 @@ import Box from '@material-ui/core/Box';
 import Link from '@material-ui/core/Link';
 import axios from "axios";
 
-const URL = "https://www.guitest.xyz:8000/api/encounters/users";
+const URL = "http://0.0.0.0:9090/api/encounters/users/";
 
 class Signup extends React.Component{
 

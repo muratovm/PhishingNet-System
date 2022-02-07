@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'sszy8x16ii(q82=7=$1hu_pg*+m(0q06@bs(z(a0*k-q5()%+c'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 
 ALLOWED_HOSTS=['192.168.2.12',"localhost","0.0.0.0","*","54.39.96.50"]
@@ -102,10 +102,17 @@ DATABASES = {
         'NAME': 'mydb',
         'USER': 'postgres',
         'PASSWORD': 'lorencia',
-        'HOST': 'localhost',
+        'HOST': '0.0.0.0',
         'PORT': '5432',
     }
 }
+
+CORS_ALLOWED_ORIGINS = [
+    'http://0.0.0.0:3000',
+    'http://localhost:3000',
+    'http://0.0.0.0:9090',
+    'http://localhost:9090',
+]
 
 
 
@@ -127,6 +134,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+ADMIN_MEDIA_PREFIX = '/static/admin/' 
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/

@@ -8,7 +8,7 @@ import Button from '@material-ui/core/Button';
 import axios from "axios";
 
 
-const URL = "https://www.guitest.xyz:8000/api/encounters/upload";
+const URL = "http://0.0.0.0:9090/api/encounters/upload/";
 
 class PhishForm extends React.Component{
   
